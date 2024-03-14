@@ -75,9 +75,10 @@
     }
 
     .disclaimer {
-      font-size: 12px;
+      font-size: 15px;
       color: #666;
       margin-top: 20px;
+      margin-bottom: 40px;
     }
 
     @media (max-width: 768px) {
@@ -265,7 +266,7 @@
       const hoursRemaining = Math.floor(timeDiff / (1000 * 60 * 60));
       const minutesRemaining = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
 
-      return `운행 종료, 다음 첫 차: ${hoursRemaining}시간 ${minutesRemaining}분`;
+      return `운행 종료, 다음 첫 차까지 : ${hoursRemaining}시간 ${minutesRemaining}분`;
     }
   }
 
