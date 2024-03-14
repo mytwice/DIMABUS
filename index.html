@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DIMA 셔틀버스 시간표</title>
+  <title>DIMA 셔틀버스 시간표(비공식)</title>
   <link rel="icon" href="bus-99056_1280.png" type="image/x-icon">
   <style>
     body {
@@ -28,7 +28,7 @@
     #timetableButton {
       font-size: 16px;
       padding: 5px 10px;
-      background-color: #808080;
+      background-color: #E564B9;
       color: #fff;
       border: none;
       border-radius: 5px;
@@ -133,7 +133,7 @@
     <tr>
       <th>평일 운행 노선</th>
       <th>정류장</th>
-      <th>다음 버스 도착 시간</th>
+      <th>출발시간</th>
     </tr>
     <tr class="inactive">
       <td rowspan="2">A노선</td>
@@ -172,7 +172,7 @@
   <tr>
     <th>일요일 오후 운행 노선</th>
     <th>정류장</th>
-    <th>다음 버스 도착 시간</th>
+    <th>출발시간</th>
   </tr>
     <tr class="inactive black">
       <td rowspan="2">C노선 (일요일)</td>
@@ -186,7 +186,11 @@
   </table>
 
   <div class="disclaimer">
-    학교에서 운영하는 것이 아닌 개인 운영 홈페이지이며 이 페이지 정보는 실시간 정보가 아닙니다. 모든 내용은 참고용도로 이용하기 바라며, 또한 정보의 정확성을 책임지지 않습니다.
+  학교에서 운영하는 것이 아닌 개인 운영 홈페이지이며 이 페이지 정보는 학교홈페이지 기준으로 실시간 정보가 아닙니다.
+  <div>
+    모든 내용은 참고용도로 이용하기 바라며, 또한 정보의 정확성을 책임지지 않습니다.
+  </div>
+  <div>운영 초기로 시간정보가 틀릴 가능성이 높고, 사이트 접속이 원활하지 않을 수 있습니다. 업데이트 : 24.03.14
   </div>
 
 </div>
@@ -265,12 +269,12 @@
       '8:25', '8:35', '8:45', '8:55', '9:35', '9:45', '9:55', '10:35', '10:45', '10:55',
       '11:35', '11:45', '11:55', '12:35', '12:45', '12:55', '13:45', '13:55', '14:45', '14:55',
       '15:45', '15:55', '16:45', '16:55', '17:45', '17:55'
- ];
- const busTimesB2 = [
- '8:30', '8:40', '8:50', '9:00', '9:40', '9:50', '10:00', '10:40', '10:50', '11:00',
- '11:40', '11:50', '12:00', '12:40', '12:50', '13:00', '13:50', '14:00', '14:50', '15:00',
- '15:50', '16:00', '16:40', '17:00', '17:50', '18:10'
- ];
+    ];
+    const busTimesB2 = [
+      '8:30', '8:40', '8:50', '9:00', '9:40', '9:50', '10:00', '10:40', '10:50', '11:00',
+      '11:40', '11:50', '12:00', '12:40', '12:50', '13:00', '13:50', '14:00', '14:50', '15:00',
+      '15:50', '16:00', '16:40', '17:00', '17:50', '18:10'
+    ];
 
  const busTimesC1 = [
  '17:00', '18:00', '19:00', '20:00', '21:00'
@@ -287,35 +291,41 @@
     // 현재 요일에 따라 노선 활성화 여부 결정
  const currentDay = new Date(.getDay(); // 0: 일요일, 1: 월요일, ..., 6: 토요일
 
-    document.getElementById('busTimeA1').innerText = 남은 시간 계산(busTimesA1);
-    document.getElementById('busTimeA2').내부 텍스트 = 남은 시간 계산(busTimesA2);
-
-    document.getElementById('busTimeB1').innerText = 남은 시간 계산(busTimesB1);
-    document.getElementById('busTimeB2').내부 텍스트 = 남은 시간 계산(busTimesB2);
-
-    // 일요일에만 C 노선 활성화
  if (currentDay === 0) {
-    문서.SelectorAll('컨테이너 tr.inactive.black')을 쿼리합니다.각(el => el.class List.remove('비활성', 'black')에 대해);
-    } 또 다른 {
-    문서.SelectorAll('컨테이너 tr.inactive')을 쿼리합니다.각(el => el.class List.add('비활성', 'black')에 대해);
+        문서.SelectorAll('컨테이너 tr.inactive.black')을 쿼리합니다.각(el => el.class List.remove('비활성', 'black')에 대해);
+        document.getElementById('busTimeC1').innerText = 남은 시간 계산(busTimesC1);
+        document.getElementById('busTimeC2').innerText = 남은 시간 계산(busTimesC2);
+ } 또 다른 {
+        문서.SelectorAll('컨테이너 tr.inactive')을 쿼리합니다.각(el => el.class List.add('비활성', 'black')에 대해);
+        document.getElementById('busTimeC1').innerText = '운행요일이 아닙니다';
+        document.getElementById('busTimeC2').innerText = '운행요일이 아닙니다';
     }
 
- 텍스트 장식: 없음;
+
+    // 토요일과 일요일을 제외한 모든 날에 A, B 노선 활성화
  if (currentDay!== 0 & currentDay!== 6) {
-    document.querySelectorAll('.container tr.inactive').forEach(el => el.classList.remove('inactive'));
-    }
+        문서.SelectorAll('컨테이너 tr.inactive')을 쿼리합니다.각(el => el.class List.remove('비활성')에 대해;
+        document.getElementById('busTimeA1').innerText = 남은 시간 계산(busTimesA1);
+        document.getElementById('busTimeA2').내부 텍스트 = 남은 시간 계산(busTimesA2);
+        document.getElementById('busTimeB1').innerText = 남은 시간 계산(busTimesB1);
+        document.getElementById('busTimeB2').내부 텍스트 = 남은 시간 계산(busTimesB2);
+        document.getElementById('busTimeLate1').내부 텍스트 = 남은 시간 계산(busTimesLate1);
+        document.getElementById('busTimeLate2').내부 텍스트 = 남은 시간 계산(busTimesLate2);
+        document.getElementById('busTimeLate3').내부 텍스트 = 남은 시간 계산(busTimesLate3);
+ } 또 다른 {
+        document.getElementById('busTimeA1').innerText = '운행요일이 아닙니다';
+        document.getElementById('busTimeA2').innerText = '운행요일이 아닙니다.';
+        document.getElementById('busTimeB1').innerText = '운행요일이 아닙니다';
+        document.getElementById('busTimeB2').innerText = '운행요일이 아닙니다.';
+        document.getElementById('busTimeLate1').innerText = '운행요일이 아닙니다.';
+        document.getElementById('busTimeLate2').innerText = '운행요일이 아닙니다.';
+        document.getElementById('busTimeLate3').innerText = '운행요일이 아닙니다.';
+      }
+}
+ 
+ setInterval(업데이트)시간, 1000);
+ setInterval(updateBus)횟수, 1000);
+</스크립트>
 
-    document.getElementById('busTimeC1').innerText = calculateTimeRemaining(busTimesC1);
-    document.getElementById('busTimeC2').innerText = calculateTimeRemaining(busTimesC2);
-    document.getElementById('busTimeLate1').innerText = calculateTimeRemaining(busTimesLate1);
-    document.getElementById('busTimeLate2').innerText = calculateTimeRemaining(busTimesLate2);
-    document.getElementById('busTimeLate3').innerText = calculateTimeRemaining(busTimesLate3);
-  }
-
-  
-  setInterval(updateTime, 1000);
-  setInterval(updateBusTimes, 1000);
-</script>
-
-</body>
-</html>
+</신체>
+  </html>
