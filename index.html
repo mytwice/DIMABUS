@@ -19,6 +19,11 @@
       margin-top: 20px;
     }
 
+    h5 {
+      color: #333;
+      margin-top: 10px;
+    }
+
     #currentTime {
       font-size: 18px;
       margin-bottom: 20px;
@@ -118,10 +123,21 @@
   </style>
 </head>
 <body>
+  <script type="text/javascript" src="//wcs.naver.net/wcslog.js"></script>
+  <script type="text/javascript">
+  if(!wcs_add) var wcs_add = {};
+  wcs_add["wa"] = "7db0854e4bbc38";
+  if(window.wcs) {
+  wcs_do();
+  }
+  </script>
 
 <div class="container">
 
   <h2>DIMA 셔틀버스 시간표(비공식)</h2>
+  <h5>
+  운영 초기로 시간정보가 틀릴 가능성이 높고, 사이트 접속이 원활하지 않을 수 있습니다. 현장에 따라 변동되오니 정류장에서 미리 대기하시기 바랍니다.
+  </h5> 
   <div>
     <span id="currentTime"></span>
     <a href="https://www.dima.ac.kr/?p=97" id="timetableButton" target="_blank">시간표 보러가기</a>
@@ -190,7 +206,7 @@
   <div>
     모든 내용은 참고용도로 이용하기 바라며, 또한 정보의 정확성을 책임지지 않습니다.
   </div>
-  <div>운영 초기로 시간정보가 틀릴 가능성이 높고, 사이트 접속이 원활하지 않을 수 있습니다. 업데이트 : 24.03.14
+  <div>원활한 운영을 위해 네이버 애널리틱스로 방문자수 등을 집계하고 있습니다. 업데이트 : 24.03.14
   </div>
 
 </div>
