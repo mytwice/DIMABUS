@@ -307,6 +307,26 @@
     const busTimesLate2 = ['18:55', '19:25', '19:50', '20:50', '21:30', '21:50'];
     const busTimesLate3 = ['18:40', '19:00', '19:30', '19:55', '20:55', '21:35', '21:55'];  
 
+    const lastBusTimes = {
+        'A노선': '18:00',
+        'B노선': '18:10',
+        '원룸촌~엔터관(18시 이후)': '21:55',
+        'C노선 (일요일)': '21:00'
+    };
+
+    const currentTime = new Date();
+    const currentHour = currentTime.getHours();
+    const currentMinute = currentTime.getMinutes();
+
+    // 노선별 마지막차 시간 설정
+    for (const [route, lastTime] of Object.entries(lastBusTimes)) {
+        const [lastHour, lastMinute] = lastTime.split(':');
+
+        if (currentHour > parseInt(lastHour) || (currentHour == parseInt(lastHour) && currentMinute >= parseInt(lastMinute))) {
+            document.getElementById(`busTime${route.replace(/\s+/g, '')}`).innerText = '마지막차';
+        }
+    }
+
     // 현재 요일에 따라 노선 활성화 여부 결정
     const currentDay = new Date().getDay(); // 0: 일요일, 1: 월요일, ..., 6: 토요일
 
