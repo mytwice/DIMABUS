@@ -276,46 +276,46 @@
       '15:50', '16:00', '16:40', '17:00', '17:50', '18:10'
     ];
 
- const busTimesC1 = [
- '17:00', '18:00', '19:00', '20:00', '21:00'
- ];
+    const busTimesC1 = [
+      '17:00', '18:00', '19:00', '20:00', '21:00'
+    ];
 
- const busTimesC2 = [
- '17:10', '18:10', '19:10', '20:10', '21:10'
- ];
+    const busTimesC2 = [
+      '17:10', '18:10', '19:10', '20:10', '21:10'
+    ];
 
- const busTimesLate1 = ['18:50', '19:20', '19:45', '20:45', '21:25', '21:45'];
- const busTimesLate2 = ['18:55', '19:25', '19:50', '20:50', '21:30', '21:50'];
- const busTimesLate3 = ['18:40', '19:00', '19:30', '19:55', '20:55', '21:35', '21:55'];  
+    const busTimesLate1 = ['18:50', '19:20', '19:45', '20:45', '21:25', '21:45'];
+    const busTimesLate2 = ['18:55', '19:25', '19:50', '20:50', '21:30', '21:50'];
+    const busTimesLate3 = ['18:40', '19:00', '19:30', '19:55', '20:55', '21:35', '21:55'];  
 
     // 현재 요일에 따라 노선 활성화 여부 결정
- const currentDay = new Date(.getDay(); // 0: 일요일, 1: 월요일, ..., 6: 토요일
+    const currentDay = new Date().getDay(); // 0: 일요일, 1: 월요일, ..., 6: 토요일
 
- if (currentDay === 0) {
-        문서.SelectorAll('컨테이너 tr.inactive.black')을 쿼리합니다.각(el => el.class List.remove('비활성', 'black')에 대해);
-        document.getElementById('busTimeC1').innerText = 남은 시간 계산(busTimesC1);
-        document.getElementById('busTimeC2').innerText = 남은 시간 계산(busTimesC2);
- } 또 다른 {
-        문서.SelectorAll('컨테이너 tr.inactive')을 쿼리합니다.각(el => el.class List.add('비활성', 'black')에 대해);
-        document.getElementById('busTimeC1').innerText = '운행요일이 아닙니다';
-        document.getElementById('busTimeC2').innerText = '운행요일이 아닙니다';
+    if (currentDay === 0) {
+        document.querySelectorAll('.container tr.inactive.black').forEach(el => el.classList.remove('inactive', 'black'));
+        document.getElementById('busTimeC1').innerText = calculateTimeRemaining(busTimesC1);
+        document.getElementById('busTimeC2').innerText = calculateTimeRemaining(busTimesC2);
+    } else {
+        document.querySelectorAll('.container tr.inactive').forEach(el => el.classList.add('inactive', 'black'));
+        document.getElementById('busTimeC1').innerText = '운행요일이 아닙니다.';
+        document.getElementById('busTimeC2').innerText = '운행요일이 아닙니다.';
     }
 
 
     // 토요일과 일요일을 제외한 모든 날에 A, B 노선 활성화
- if (currentDay!== 0 & currentDay!== 6) {
-        문서.SelectorAll('컨테이너 tr.inactive')을 쿼리합니다.각(el => el.class List.remove('비활성')에 대해;
-        document.getElementById('busTimeA1').innerText = 남은 시간 계산(busTimesA1);
-        document.getElementById('busTimeA2').내부 텍스트 = 남은 시간 계산(busTimesA2);
-        document.getElementById('busTimeB1').innerText = 남은 시간 계산(busTimesB1);
-        document.getElementById('busTimeB2').내부 텍스트 = 남은 시간 계산(busTimesB2);
-        document.getElementById('busTimeLate1').내부 텍스트 = 남은 시간 계산(busTimesLate1);
-        document.getElementById('busTimeLate2').내부 텍스트 = 남은 시간 계산(busTimesLate2);
-        document.getElementById('busTimeLate3').내부 텍스트 = 남은 시간 계산(busTimesLate3);
- } 또 다른 {
-        document.getElementById('busTimeA1').innerText = '운행요일이 아닙니다';
+    if (currentDay !== 0 && currentDay !== 6) {
+        document.querySelectorAll('.container tr.inactive').forEach(el => el.classList.remove('inactive'));
+        document.getElementById('busTimeA1').innerText = calculateTimeRemaining(busTimesA1);
+        document.getElementById('busTimeA2').innerText = calculateTimeRemaining(busTimesA2);
+        document.getElementById('busTimeB1').innerText = calculateTimeRemaining(busTimesB1);
+        document.getElementById('busTimeB2').innerText = calculateTimeRemaining(busTimesB2);
+        document.getElementById('busTimeLate1').innerText = calculateTimeRemaining(busTimesLate1);
+        document.getElementById('busTimeLate2').innerText = calculateTimeRemaining(busTimesLate2);
+        document.getElementById('busTimeLate3').innerText = calculateTimeRemaining(busTimesLate3);
+      } else {
+        document.getElementById('busTimeA1').innerText = '운행요일이 아닙니다.';
         document.getElementById('busTimeA2').innerText = '운행요일이 아닙니다.';
-        document.getElementById('busTimeB1').innerText = '운행요일이 아닙니다';
+        document.getElementById('busTimeB1').innerText = '운행요일이 아닙니다.';
         document.getElementById('busTimeB2').innerText = '운행요일이 아닙니다.';
         document.getElementById('busTimeLate1').innerText = '운행요일이 아닙니다.';
         document.getElementById('busTimeLate2').innerText = '운행요일이 아닙니다.';
@@ -323,9 +323,9 @@
       }
 }
  
- setInterval(업데이트)시간, 1000);
- setInterval(updateBus)횟수, 1000);
-</스크립트>
+  setInterval(updateTime, 1000);
+  setInterval(updateBusTimes, 1000);
+</script>
 
-</신체>
-  </html>
+</body>
+</html>
