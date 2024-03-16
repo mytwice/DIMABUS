@@ -209,10 +209,10 @@
   <div>
     모든 내용은 참고용도로 이용하기 바라며, 또한 이 사이트를 이용함으로 발생하는 손해에 대해 책임을 지지 않습니다.
   </div>
-  <div>원활한 운영을 위해 네이버 애널리틱스로 방문자수 등을 집계하고 있습니다. 업데이트 : 24.03.14
+  <div>원활한 운영을 위해 네이버 애널리틱스로 방문자수 등을 집계하고 있습니다.
   </div>
-
-</div>
+  <div>업데이트 : 24.03.17
+  </div>
 
 <script>
   function formatTime(hours, minutes, seconds) {
@@ -317,15 +317,6 @@
     const currentTime = new Date();
     const currentHour = currentTime.getHours();
     const currentMinute = currentTime.getMinutes();
-
-    // 노선별 마지막차 시간 설정
-    for (const [route, lastTime] of Object.entries(lastBusTimes)) {
-        const [lastHour, lastMinute] = lastTime.split(':');
-
-        if (currentHour > parseInt(lastHour) || (currentHour == parseInt(lastHour) && currentMinute >= parseInt(lastMinute))) {
-            document.getElementById(`busTime${route.replace(/\s+/g, '')}`).innerText = '마지막차';
-        }
-    }
 
     // 현재 요일에 따라 노선 활성화 여부 결정
     const currentDay = new Date().getDay(); // 0: 일요일, 1: 월요일, ..., 6: 토요일
