@@ -210,7 +210,7 @@
   </table>
 
   <div class="disclaimer">
-  학교에서 운영하는 것이 아닌 개인 운영 홈페이지이며 이 페이지 정보는 학교홈페이지 기준으로 실시간 정보가 아닙니다.
+  학교에서 운영하는 것이 아닌 개인이 운영하는 홈페이지이며 이 페이지의 정보는 학교 홈페이지 기준으로 실시간 정보가 아닙니다.
   <div>
     모든 내용은 참고용도로 이용하기 바라며, 또한 이 사이트를 이용함으로 발생하는 손해에 대해 책임을 지지 않습니다.
   </div>
@@ -222,7 +222,9 @@
   <div>
   <a href="https://blog.naver.com/hwser2005/221762536378">IOS 아이폰</a>
   <a href="https://healthydoctor.tistory.com/306">안드로이드</a>
-    업데이트 : 24.03.22
+  <a href="https://blog.naver.com/sanae_art/223144378452">갤럭시워치</a>
+
+    업데이트 : 24.03.26
   </div>
 
 <script>
@@ -279,10 +281,12 @@
       const hoursRemaining = Math.floor(timeDiff / (1000 * 60 * 60));
       const minutesRemaining = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
 
-      return `운행 종료, 다음 첫 차까지 : ${hoursRemaining}시간 ${minutesRemaining}분`;
+      return `운행 종료`;
     }
   }
+//, 다음 첫 차까지 : ${hoursRemaining}시간 ${minutesRemaining}분 (일요일에 제거 전까지 제거함)
 
+  
   function updateBusTimes() {
     const busTimesA1 = [
       '8:20', '8:40', '8:50', '8:55', '9:30', '9:40', '9:50', '9:55', '10:30', '10:40',
