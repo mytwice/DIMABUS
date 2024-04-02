@@ -38,6 +38,13 @@
       word-break: keep-all;
     }
 
+    h6 {
+      color: #c44e4e;
+      font-size: 18px;
+      margin-top: 10px;
+      word-break: keep-all;
+    }
+
     #currentTime {
       font-size: 18px;
       margin-bottom: 20px;
@@ -143,6 +150,11 @@
 <div class="container">
 
   <h2>DIMA 셔틀버스 시간표(비공식)</h2>
+  <h6>
+    [학교 홈페이지 긴급공지] 금일(4.2) 단수로 인하여 기숙사 석식은 학생회관 학생식당으로 이동하여 제공합니다.
+    이에 따라 셔틀버스를 운행하오니 착오 없으시기 바랍니다. 셔틀버스 : 17시 50분 부터 수시 운행 출발장소 : 엔터관 주차장
+    </h6>
+
   <h5>
   [공지] 운영 초기로 시간정보가 틀릴 가능성이 높고, 사이트 접속이 원활하지 않을 수 있습니다. 현장상황에 따라 조착, 지연될 수 있으므로 반드시 출발시간 이전에 정류장에서 미리 대기하시기 바랍니다.
   </h5> 
@@ -210,21 +222,19 @@
   </table>
 
   <div class="disclaimer">
-  학교에서 운영하는 것이 아닌 개인이 운영하는 홈페이지이며 이 페이지의 정보는 학교 홈페이지 기준으로 실시간 정보가 아닙니다.
+  학교에서 운영하는 것이 아닌 개인 운영 홈페이지이며 이 페이지 정보는 학교홈페이지 기준으로 실시간 정보가 아닙니다.
   <div>
     모든 내용은 참고용도로 이용하기 바라며, 또한 이 사이트를 이용함으로 발생하는 손해에 대해 책임을 지지 않습니다.
   </div>
-  <div>원활한 운영을 위해 네이버, 구글 애널리틱스로 방문자수 등을 집계하고 있습니다.
+  <div>원활한 운영을 위해 구글 애널리틱스로 방문자수 등을 집계하고 있습니다.
   </div>
   <div>
-    ※ 홈화면에 바로가기를 추가하면 편리합니다.
+    홈화면에 바로가기를 추가하면 편리합니다.
   </div>
   <div>
   <a href="https://blog.naver.com/hwser2005/221762536378">IOS 아이폰</a>
   <a href="https://healthydoctor.tistory.com/306">안드로이드</a>
-  <a href="https://blog.naver.com/sanae_art/223144378452">갤럭시워치</a>
-
-    업데이트 : 24.03.26
+    업데이트 : 24.03.22
   </div>
 
 <script>
@@ -281,12 +291,10 @@
       const hoursRemaining = Math.floor(timeDiff / (1000 * 60 * 60));
       const minutesRemaining = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
 
-      return `운행 종료`;
+      return `운행 종료, 다음 첫 차까지 : ${hoursRemaining}시간 ${minutesRemaining}분`;
     }
   }
-//, 다음 첫 차까지 : ${hoursRemaining}시간 ${minutesRemaining}분 (일요일에 제거 전까지 제거함)
 
-  
   function updateBusTimes() {
     const busTimesA1 = [
       '8:20', '8:40', '8:50', '8:55', '9:30', '9:40', '9:50', '9:55', '10:30', '10:40',
@@ -365,14 +373,5 @@
   setInterval(updateBusTimes, 1000);
 </script>
 
-<script type="text/javascript" src="//wcs.naver.net/wcslog.js"></script>
-<script type="text/javascript">
-if(!wcs_add) var wcs_add = {};
-wcs_add["wa"] = "31701426a03848";
-if(window.wcs) {
-  wcs_do();
-}
-</script>    
-    
 </body>
 </html>
