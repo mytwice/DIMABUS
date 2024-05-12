@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DIMA 셔틀버스 시간표(비공식)</title>
+    <link rel="icon" href="bus-99056_1280.svg" type="image/x-icon">
+    <link rel="stylesheet" href="test.css">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="test.js"></script>
+</head>
+<body>
+<div class="container">
+    <h2>DIMA 셔틀버스 시간표(비공식)</h2>
+    
+    <!-- <h6>
+        [학교 홈페이지 긴급공지] 긴급공지
+    </h6> -->
+
+    <div id="success"></div>
+    <div>
+        <span id="currentTime"></span>
+        <a href="https://www.dima.ac.kr/?p=97" id="timetableButton" target="_blank">시간표 보러가기</a>
+        <a href="https://open.kakao.com/o/sQ5O8Zfg" id="timetableButton" target="_blank">오류제보</a>
+    </div>
+    <table>
+        <tr>
+            <th>평일 운행 노선</th>
+            <th>정류장(막차시간)</th>
+            <th>출발시간</th>
+        </tr>
+        <tr class="inactive">
+            <td rowspan="2">A노선</td>
+            <td>원룸촌(18:00)</td>
+            <td id="busTimeA1"></td>
+        </tr>
+        <tr class="inactive">
+            <td>대학본부(17:45)</td>
+            <td id="busTimeA2"></td>
+        </tr>
+        <tr class="inactive">
+            <td rowspan="2">B노선</td>
+            <td>대학본부(17:55)</td>
+            <td id="busTimeB1"></td>
+        </tr>
+        <tr class="inactive">
+            <td>엔터관(18:10)</td>
+            <td id="busTimeB2"></td>
+        </tr>
+        <tr class="inactive">
+            <td rowspan="3">원룸촌~엔터관(18시 이후)</td>
+            <td>원룸촌(21:45)</td>
+            <td id="busTimeLate1"></td>
+        </tr>
+        <tr class="inactive">
+            <td>운동장정류장(21:50)</td>
+            <td id="busTimeLate2"></td>
+        </tr>
+        <tr class="inactive">
+            <td>엔터관(21:55)</td>
+            <td id="busTimeLate3"></td>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <th>일요일 오후 운행 노선</th>
+            <th>정류장(막차시간)</th>
+            <th>출발시간</th>
+        </tr>
+        <tr class="inactive black">
+            <td rowspan="2">C노선 (일요일)</td>
+            <td>원룸촌(21:00)</td>
+            <td id="busTimeC1"></td>
+        </tr>
+        <tr class="inactive black">
+            <td>엔터관(21:10)</td>
+            <td id="busTimeC2"></td>
+        </tr>
+    </table>
+    <div class="disclaimer">
+    학교에서 운영하는 것이 아닌 개인이 운영하는 홈페이지이며 이 페이지의 정보는 학교 홈페이지 기준으로 실시간 정보가 아닙니다.
+    <div>
+        모든 내용은 참고용도로 이용하기 바라며, 또한 이 사이트를 이용함으로 발생하는 손해에 대해 책임을 지지 않습니다.
+    </div>
+    <div>원활한 운영을 위해 네이버, 구글 애널리틱스로 방문자수 등을 집계하고 있습니다.
+    </div>
+    <div>
+    ※ 홈화면에 바로가기를 추가하면 편리합니다.
+    </div>
+    <div>
+        <a href="https://blog.naver.com/hwser2005/221762536378">IOS 아이폰</a>
+        <a href="https://healthydoctor.tistory.com/306">안드로이드</a>
+        <a href="https://blog.naver.com/sanae_art/223144378452">갤럭시워치</a>
+        업데이트 : 24.04.02
+    </div>
+</body>
+</html>
