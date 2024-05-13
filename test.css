@@ -79,7 +79,7 @@ td {
     word-break: keep-all;
 }
 
-#success {
+#notice {
     border: 1px solid #E564B9;
     background-color: #f3dbeb;
     color: #a33b80;
@@ -89,6 +89,37 @@ td {
     margin-bottom: 20px;
     text-align: left;
     word-break: keep-all;
+}
+
+#notice > details {
+    transition: background-color 500ms ease 0s;
+}
+
+summary::marker {
+    content: "▶ 공지사항 펼치기";
+}
+
+details[open] summary::marker {
+    content: "️▼ 공지사항 접기";
+}
+
+#notice-text {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+#notice-text > hr {
+    background-color: #E564B9;
+    height: 1px;
+    border: 0;
+}
+
+#notice-list {
+    margin-top: 5px;
+}
+
+#notice-list > ul {
+    margin: 0;
 }
 
 @media (max-width: 768px) {

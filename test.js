@@ -152,11 +152,11 @@ google.charts.load("current", { packages: ["corechart"] }).then(() => {
 
         for (var i in rows) {
             if (rows[i]['공지 ON/OFF'] === "TRUE") {
-                document.getElementById('success').style.display = "flow-root";
-                arr.push(rows[i]['공지사항']);
+                document.getElementById('notice').style.display = "flow-root";
+                arr.push("<li>" + rows[i]['공지사항'] + "</li>");
             }
         };
         
-        document.getElementById('success').innerText = arr.join('\n');
+        document.getElementById('notice-list').innerHTML = "<ul>" + arr.join('\n') + "</ul>";
     });
 });
