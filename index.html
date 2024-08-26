@@ -94,26 +94,25 @@
       word-break: keep-all;
     }
     @media (max-width: 768px) {
-    .container {
-      padding: 0 10px; /* 모바일에서 좌우 여백 줄이기 */
-    }
-    table {
-      width: 100%;
-    }
-    #currentTime {
-      position: relative; /* 시계의 위치를 상대적으로 설정하여 버튼을 쌓을 수 있도록 함 */
-      margin-bottom: 10px; /* 버튼과의 간격 조정 */
-    }
-    .button-container {
-      flex-direction: column; /* 버튼을 세로로 배치 */
-      align-items: center; /* 버튼을 가운데 정렬 */
-    }
-    /* 모바일에서 시계와 버튼을 한 줄에 배치하고 버튼을 아래로 이동 */
-    #currentTime,
-    #timetableButton {
-      display: inline-flex;
-      margin: 10px auto;
-     }
+      .container {
+        padding: 0 10px; /* 모바일에서 좌우 여백 줄이기 */
+      }
+
+      #currentTime {
+        display: block;
+        margin: 10px auto;
+      }
+
+      .button-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .button-container a {
+        display: block;
+        margin: 5px 0;
+      }
     }
     /* 추가 스타일: 요일별 노선 가리기 */
     .inactive {
@@ -151,6 +150,7 @@
   </h5> 
   <div>
     <span id="currentTime"></span>
+    
     <a href="https://www.dima.ac.kr/?p=97" id="timetableButton" target="_blank">시간표 보러가기</a>
     <a href="https://mytwice.github.io/DIMABUS/routemap" id="timetableButton" target="_blank">노선도</a>
     <a href="https://open.kakao.com/o/sQ5O8Zfg" id="timetableButton" target="_blank">오류 제보</a>
@@ -238,7 +238,7 @@
   <a href="https://blog.naver.com/hwser2005/221762536378">IOS 아이폰</a>
   <a href="https://healthydoctor.tistory.com/306">안드로이드</a>
   <a href="https://blog.naver.com/sanae_art/223144378452">갤럭시워치</a>
-    업데이트 : 24.08.27
+    업데이트 : 24.08.26
   </div>
 <script>
   function formatTime(hours, minutes, seconds) {
