@@ -247,8 +247,8 @@
   function updateTime() {
     const currentTimeElement = document.getElementById('currentTime');
     const currentTime = new Date();
-    const hours = 15
-    const minutes = 5
+    const hours = currentTime.getHours();
+const minutes = currentTime. getMinutes();
     const seconds = currentTime.getSeconds();
     // 초가 0이 아닐 때에만 초를 표시
     const formattedTime = formatTime(hours, minutes, seconds);
@@ -367,7 +367,7 @@
     const currentHour = currentTime.getHours();
     const currentMinute = currentTime.getMinutes();
     // 현재 요일에 따라 노선 활성화 여부 결정
-    const currentDay = 2 // 0: 일요일, 1: 월요일, ..., 6: 토요일
+    const currentDay = new Date().getDay( ); // 0: 일요일, 1: 월요일, ..., 6: 토요일
     if (currentDay === 0) {
         document.querySelectorAll('.container tr.inactive.black').forEach(el => el.classList.remove('inactive', 'black'));
         const [remainingTimeC1, nextRemainingTimeC1] = calculateNextTwoRemainingTimes(busTimesC1);
