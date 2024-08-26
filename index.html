@@ -7,7 +7,7 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', 'G-Z36W3EPHYF');
+  gtag('config', 'G-3EPHYF');
 </script>
   
   <meta charset="UTF-8">
@@ -152,6 +152,7 @@
   <div>
     <span id="currentTime"></span>
     <a href="https://www.dima.ac.kr/?p=97" id="timetableButton" target="_blank">시간표 보러가기</a>
+    <a href="https://mytwice.github.io/DIMABUS/routemap" id="timetableButton" target="_blank">노선도</a>
     <a href="https://open.kakao.com/o/sQ5O8Zfg" id="timetableButton" target="_blank">오류 제보</a>
   </div>
   <table>
@@ -208,7 +209,7 @@
     <th>일요일 오후 운행 노선</th>
     <th>정류장(막차시간)</th>
     <th>출발시간</th>
-    <th>다음차까지 남은 시간</th>
+    <th>다음 출발시간</th>
   </tr>
   <tr class="inactive black">
     <td rowspan="2">C노선 (일요일)</td>
@@ -237,7 +238,7 @@
   <a href="https://blog.naver.com/hwser2005/221762536378">IOS 아이폰</a>
   <a href="https://healthydoctor.tistory.com/306">안드로이드</a>
   <a href="https://blog.naver.com/sanae_art/223144378452">갤럭시워치</a>
-    업데이트 : 24.08.26
+    업데이트 : 24.08.27
   </div>
 <script>
   function formatTime(hours, minutes, seconds) {
@@ -246,8 +247,8 @@
   function updateTime() {
     const currentTimeElement = document.getElementById('currentTime');
     const currentTime = new Date();
-    const hours = currentTime.getHours();
-    const minutes = currentTime.getMinutes();
+    const hours = 15
+    const minutes = 5
     const seconds = currentTime.getSeconds();
     // 초가 0이 아닐 때에만 초를 표시
     const formattedTime = formatTime(hours, minutes, seconds);
@@ -366,7 +367,7 @@
     const currentHour = currentTime.getHours();
     const currentMinute = currentTime.getMinutes();
     // 현재 요일에 따라 노선 활성화 여부 결정
-    const currentDay = new Date().getDay(); // 0: 일요일, 1: 월요일, ..., 6: 토요일
+    const currentDay = 2 // 0: 일요일, 1: 월요일, ..., 6: 토요일
     if (currentDay === 0) {
         document.querySelectorAll('.container tr.inactive.black').forEach(el => el.classList.remove('inactive', 'black'));
         const [remainingTimeC1, nextRemainingTimeC1] = calculateNextTwoRemainingTimes(busTimesC1);
@@ -422,7 +423,7 @@
 <script type="text/javascript" src="//wcs.naver.net/wcslog.js"></script>
 <script type="text/javascript">
 if(!wcs_add) var wcs_add = {};
-wcs_add["wa"] = "31701426a03848";
+wcs_add["wa"] = "317848";
 if(window.wcs) {
   wcs_do();
 }
