@@ -2,13 +2,12 @@
 <html lang="en">
 <head>
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LMX69BZK6G"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BZK6G"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-    
-      gtag('config', 'G-LMX69BZK6G');
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-LMX69BZK6G');
     </script>
 
     <meta charset="UTF-8">
@@ -53,6 +52,18 @@
             position: absolute;
             top: 10px;
             left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        #controls2 {
+            position: absolute;
+            top: 10px;
+            left: 15%;
             transform: translateX(-50%);
             z-index: 10;
             display: flex;
@@ -111,8 +122,11 @@
         <img id="routeC" src="routec.png" alt="Route C">
         
         <!-- 메인으로 돌아가는 버튼과 노선 버튼 -->
-        <div id="controls">
+        <div id="controls2">
             <button id="main-button" onclick="goToMain()">이전 페이지</button>
+        </div>
+        
+        <div id="controls">
             <button onclick="showRoute('routeA')">A노선</button>
             <button onclick="showRoute('routeB')">B노선</button>
             <button onclick="showRoute('routeC')">C노선</button>
