@@ -2,15 +2,15 @@
 <html lang="en">
 <head>
     <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-LMX69BZK6G"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-LMX69BZK6G');
-</script>
-
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LMX69BZK6G"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'G-LMX69BZK6G');
+    </script>
+        
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DIMA 셔틀버스 시간표(비공식)</title>
@@ -51,16 +51,19 @@
 
         #controls {
             position: absolute;
-            top: 50px;
-            left: 10px;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
             z-index: 10;
             display: flex;
             gap: 5px;
+            flex-wrap: wrap;
+            justify-content: center;
         }
 
         #controls button, #main-button {
-            font-size: 30px;
-            padding: 5px 10px;
+            font-size: 16px;
+            padding: 10px 15px;
             background-color: #E564B9;
             color: #fff;
             border: none;
@@ -77,14 +80,26 @@
 
         #source {
             position: absolute;
-            bottom: 30px;
-            right: 20px;
-            font-size: 30px;
+            bottom: 10px;
+            right: 10px;
+            font-size: 14px;
             color: #333;
             z-index: 10;
             background-color: rgba(255, 255, 255, 0.8); /* 배경을 약간 투명하게 설정 */
             padding: 5px 10px;
             border-radius: 5px;
+        }
+
+        @media (min-width: 768px) {
+            #controls button, #main-button {
+                font-size: 20px;
+                padding: 10px 20px;
+            }
+
+            #source {
+                font-size: 18px;
+                padding: 10px 15px;
+            }
         }
     </style>
 </head>
