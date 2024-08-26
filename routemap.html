@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DIMA 셔틀버스 시간표(비공식)</title>
+    <link rel="icon" href="bus-99056_1280.svg" type="image/x-icon">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #f5f5f5; /* 그레이 배경 */
+        }
+
+        #map-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            border: none;
+            overflow: hidden;
+        }
+
+        #map-container img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: none;
+            user-drag: none;
+            -webkit-user-drag: none;
+            pointer-events: none;
+        }
+
+        #map-container img.base-map {
+            display: block;
+        }
+
+        #controls {
+            position: absolute;
+            top: 50px;
+            left: 10px;
+            z-index: 10;
+            display: flex;
+            gap: 5px;
+        }
+
+        #controls button, #main-button {
+            font-size: 30px;
+            padding: 5px 10px;
+            background-color: #E564B9;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            margin-top: 10px;
+            white-space: nowrap;
+        }
+
+        #main-button {
+            margin-left: 0;
+        }
+
+        #source {
+            position: absolute;
+            bottom: 30px;
+            right: 20px;
+            font-size: 30px;
+            color: #333;
+            z-index: 10;
+            background-color: rgba(255, 255, 255, 0.8); /* 배경을 약간 투명하게 설정 */
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="map-container">
+        <img src="base_map.png" alt="Base Map" class="base-map">
+        <img id="routeA" src="routeA.png" alt="Route A">
+        <img id="routeB" src="routeB.png" alt="Route B">
+        <img id="routeC" src="routeC.png" alt="Route C">
+        
+        <!-- 메인으로 돌아가는 버튼과 노선 버튼 -->
+        <div id="controls">
+            <button id="main-button" onclick="goToMain()">메인으로 이동</button>
+            <button onclick="showRoute('routeA')">A노선</button>
+            <button onclick="showRoute('routeB')">B노선</button>
+            <button onclick="showRoute('routeC')">C노선</button>
+        </div>
+
+        <!-- 지도 출처 -->
+        <div id="source">
+            지도 출처 : 네이버 / 국토지리정보원
+        </div>
+    </div>
+
+    <script>
+        function showRoute(routeId) {
+            // 모든 노선 숨기기
+            var routes = document.querySelectorAll('#map-container img:not(.base-map)');
+            routes.forEach(function(route) {
+                route.style.display = "none";
+            });
+
+            // 선택된 노선만 보이게 설정
+            var img = document.getElementById(routeId);
+            img.style.display = "block";
+        }
+
+        function goToMain() {
+            window.location.href = "https://mytwice.github.io/DIMABUS"; // 메인 페이지로 이동
+        }
+    </script>
+</body>
+</html>
