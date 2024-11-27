@@ -93,6 +93,41 @@
       margin-bottom: 40px;
       word-break: keep-all;
     }
+    #notice {
+        border: 1px solid #E564B9;
+        background-color: #f3dbeb;
+        color: #a33b80;
+        padding: 10px;
+        border-radius: 10px;
+        display: none;
+        margin-bottom: 20px;
+        text-align: left;
+        word-break: keep-all;
+    }
+    #notice > details {
+        transition: background-color 500ms ease 0s;
+    }
+    summary::marker {
+        content: "▶ 공지사항 펼치기";
+    }
+    details[open] summary::marker {
+        content: "️▼ 공지사항 접기";
+    }
+    #notice-text {
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+    #notice-text > hr {
+        background-color: #E564B9;
+        height: 1px;
+        border: 0;
+    }
+    #notice-list {
+        margin-top: 5px;
+    }
+    #notice-list > ul {
+        margin: 0;
+    }
     @media (max-width: 768px) {
       .container {
         padding: 0 10px; /* 모바일에서 좌우 여백 줄이기 */
@@ -134,18 +169,17 @@
   
   <!-- 공지사항부분 -->
   <!-- <h6>
-    [입시기간 교내 셔틀버스 운행 안내]하단 홈페이지 시간표가 아닌 하단 학교 홈페이지 공지를 참고하시기 바랍니다 
-  </h6> -->
-  <!-- <div>
-   <a href="https://www.instagram.com/p/DA97rtGyutS/?img_index=1" id="timetableButton" target="_blank">학교 공지사항</a>
-  </div> -->
+   </h6> -->
   
-  <h5>
-  [공지] 운영 초기로 시간정보가 틀릴 가능성이 높고, 사이트 접속이 원활하지 않을 수 있습니다. 현장 상황에 따라 조착, 지연될 수 있으므로 반드시 출발시간 이전에 정류장에서 미리 대기하시기 바랍니다.
-  </h5> 
+  <div id="notice">
+      <div id="notice-text">공지사항<hr></div>
+      <details open>
+          <summary></summary>
+          <div id="notice-list"></div>
+      </details>
+  </div>
   <div>
     <span id="currentTime"></span>
-    
     <a href="https://www.dima.ac.kr/?p=97" id="timetableButton" target="_blank">시간표 보러가기</a>
     <a href="https://mytwice.github.io/DIMABUS/routemap" id="timetableButton" target="_blank">노선도</a>
     <a href="https://open.kakao.com/o/sQ5O8Zfg" id="timetableButton" target="_blank">오류 제보</a>
@@ -236,6 +270,8 @@
     업데이트 : 24.11.26 시간표 수정
   </div>
 <script>
+  let myKey = "1iMPbNin0C5v9oIqEQm0aM4OCg9IwDswemDxdEW0Ati8"; // 스프레드시트 KEY
+
   function formatTime(hours, minutes, seconds) {
     return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
   }
@@ -414,6 +450,52 @@ const minutes = currentTime. getMinutes();
  
   setInterval(updateTime, 1000);
   setInterval(updateBusTimes, 1000);
+
+  google.charts.load("current", { packages: ["corechart"] }).then(() => {
+      let query = new google.visualization.Query(
+          `http://spreadsheets.google.com/tq?key=${myKey}&pub=1`
+      );
+  
+      query.send((response) => {
+          if (response.isError()) {
+              console.error(
+                  "Error in query: " +
+                  response.getMessage() +
+                  " " +
+                  response.getDetailedMessage()
+          );
+          return;
+          }
+  
+          let dataTable = response.getDataTable().toJSON();
+          let jsonData = JSON.parse(dataTable);
+          let cols = jsonData.cols.map((col) => col.label);
+          let rows = jsonData.rows.map((row) => {
+          let newRow;
+  
+          row.c.forEach((obj, index) => {
+              if (obj == null || obj == undefined) return; //빈값이 경우 정지
+              obj[cols[index]] = "f" in obj ? obj["f"] : obj["v"];
+              ["f", "v"].forEach((each) => delete obj[each]);
+              newRow = { ...newRow, ...obj };
+          });
+  
+          return newRow;
+          });
+  
+          var arr = [];
+  
+          for (var i in rows) {
+              if (rows[i]['공지 ON/OFF'] === "TRUE") {
+                  document.getElementById('notice').style.display = "flow-root";
+                  arr.push("<li>" + rows[i]['공지사항'] + "</li>");
+              }
+          };
+          
+          document.getElementById('notice-list').innerHTML = "<ul>" + arr.join('\n') + "</ul>";
+      });
+  });
+  
 </script>
 <script type="text/javascript" src="//wcs.naver.net/wcslog.js"></script>
 <script type="text/javascript">
