@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z36W3EPHYF"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-Z36W3EPHYF');
+</script>
+  
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DIMA 셔틀버스 시간표(비공식)</title>
+  <link rel="icon" href="bus-99056_1280.svg" type="image/x-icon">
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+    h2 {
+      color: #ffffff;
+      margin-top: 20px;
+      background-color: #E564B9;
+      padding: 15px 0;
+      word-break: keep-all;
+    }
+    h5 {
+      color: #333;
+      margin-top: 10px;
+      word-break: keep-all;
+    }
+
+    h6 {
+      color: #c44e4e;
+      font-size: 25px;
+      margin-top: 10px;
+      word-break: keep-all;
+    }
+
+    #currentTime {
+      font-size: 18px;
+      margin-bottom: 20px;
+      color: #666;
+    }
+    #timetableButton {
+      font-size: 16px;
+      padding: 5px 10px;
+      background-color: #E564B9;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      text-decoration: none;
+      margin-left: 10px;
+      white-space: nowrap;
+    }
+    .container {
+      max-width: 1200px; /* 최대 컨테이너 너비 (PC) */
+      margin: 0 auto;   /* 가운데 정렬 */
+      padding: 0 20px;   /* 좌우 여백 */
+      background-color: #f5f5f5; /* 이 부분을 추가하여 그레이 배경을 .container에 적용 */
+      word-wrap: break-word;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin: 20px 0;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    th, td {
+      border: 1px solid #dddddd;
+      text-align: center;
+      padding: 12px;
+      position: relative;
+      word-break: keep-all;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    td {
+      background-color: #fff;
+    }
+    .disclaimer {
+      font-size: 15px;
+      color: #666;
+      margin-top: 20px;
+      margin-bottom: 40px;
+      word-break: keep-all;
+    }
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 10px; /* 모바일에서 좌우 여백 줄이기 */
+      }
+
+      #currentTime {
+        display: block;
+        margin: 10px auto;
+      }
+
+      .button-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .button-container a {
+        display: block;
+        margin: 5px 0;
+      }
+    }
+    /* 추가 스타일: 요일별 노선 가리기 */
+    .inactive {
+      opacity: 0.5;
+    }
+    /* 추가 스타일: 흐린 느낌 주기 */
+    tr.inactive td {
+      background-color: #ddd; /* 흐린 회색 */
+      opacity: 0.7; /* 투명도 조절 */
+    }
+    tr.inactive.black td {
+      background-color: #ddd; /* 흐린 검은색 */
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h2>DIMA 셔틀버스 시간표(비공식)</h2>
+  
+  <!-- 공지사항부분 -->
+  <!-- <h6>
+    [입시기간 교내 셔틀버스 운행 안내]하단 홈페이지 시간표가 아닌 하단 학교 홈페이지 공지를 참고하시기 바랍니다 
+  </h6> -->
+  <!-- <div>
+   <a href="https://www.instagram.com/p/DA97rtGyutS/?img_index=1" id="timetableButton" target="_blank">학교 공지사항</a>
+  </div> -->
+  
+  <h5>
+  [공지] 운영 초기로 시간정보가 틀릴 가능성이 높고, 사이트 접속이 원활하지 않을 수 있습니다. 현장 상황에 따라 조착, 지연될 수 있으므로 반드시 출발시간 이전에 정류장에서 미리 대기하시기 바랍니다.
+  </h5> 
+  <div>
+    <span id="currentTime"></span>
+    
+    <a href="https://www.dima.ac.kr/?p=97" id="timetableButton" target="_blank">시간표 보러가기</a>
+    <a href="https://mytwice.github.io/DIMABUS/routemap" id="timetableButton" target="_blank">노선도</a>
+    <a href="https://open.kakao.com/o/sQ5O8Zfg" id="timetableButton" target="_blank">오류 제보</a>
+  </div>
+  <table>
+  <tr>
+    <th>평일 운행 노선</th>
+    <th>정류장(막차시간)</th>
+    <th>출발시간</th>
+    <th>다음 출발시간</th>
+  </tr>
+  <!-- A노선 -->
+  <tr class="inactive">
+    <td rowspan="2">A노선</td>
+    <td>원룸촌(18:00)</td>
+    <td id="busTimeA1"></td>
+    <td id="remainingTimeA1"></td>
+  </tr>
+  <tr class="inactive">
+    <td>대학본부(17:45)</td>
+    <td id="busTimeA2"></td>
+    <td id="remainingTimeA2"></td>
+  </tr>
+  <!-- B노선 -->
+  <tr class="inactive">
+    <td rowspan="2">B노선</td>
+    <td>대학본부(17:55)</td>
+    <td id="busTimeB1"></td>
+    <td id="remainingTimeB1"></td>
+  </tr>
+  <tr class="inactive">
+    <td>엔터관(18:10)</td>
+    <td id="busTimeB2"></td>
+    <td id="remainingTimeB2"></td>
+  </tr>
+  <!-- 원룸촌~엔터관(18시 이후) -->
+  <tr class="inactive">
+    <td rowspan="3">원룸촌~엔터관(18시 이후)</td>
+    <td>원룸촌(21:45)</td>
+    <td id="busTimeLate1"></td>
+    <td id="remainingTimeLate1"></td>
+  </tr>
+  <tr class="inactive">
+    <td>운동장정류장(21:50)</td>
+    <td id="busTimeLate2"></td>
+    <td id="remainingTimeLate2"></td>
+  </tr>
+  <tr class="inactive">
+    <td>엔터관(21:55)</td>
+    <td id="busTimeLate3"></td>
+    <td id="remainingTimeLate3"></td>
+  </tr>
+</table>
+<table>
+  <tr>
+    <th>일요일 오후 운행 노선</th>
+    <th>정류장(막차시간)</th>
+    <th>출발시간</th>
+    <th>다음 출발시간</th>
+  </tr>
+  <tr class="inactive black">
+    <td rowspan="2">C노선 (일요일)</td>
+    <td>원룸촌(21:00)</td>
+    <td id="busTimeC1"></td>
+    <td id="remainingTimeC1"></td>
+  </tr>
+  <tr class="inactive black">
+    <td>엔터관(21:10)</td>
+    <td id="busTimeC2"></td>
+    <td id="remainingTimeC2"></td>
+  </tr>
+</table>
+
+  <div class="disclaimer">
+  학교에서 운영하는 것이 아닌 개인이 운영하는 홈페이지이며 이 페이지의 정보는 학교 홈페이지 기준으로 실시간 정보가 아닙니다.
+  <div>
+    모든 내용은 참고 용도로 이용하기를 바라며, 또한 이 사이트를 이용함으로 발생하는 손해에 대해 책임지지 않습니다.
+  </div>
+  <div>원활한 운영을 위해 네이버, 구글 애널리틱스로 방문자 수 등을 집계하고 있습니다.
+  </div>
+  <div>
+  ※ 홈 화면에 바로가기를 추가하면 편리합니다.
+  </div>
+  <div>
+  <a href="https://blog.naver.com/hwser2005/221762536378">IOS 아이폰</a>
+  <a href="https://healthydoctor.tistory.com/306">안드로이드</a>
+  <a href="https://blog.naver.com/sanae_art/223144378452">갤럭시워치</a>
+    업데이트 : 24.11.26 시간표 수정
+  </div>
+<script>
+  function formatTime(hours, minutes, seconds) {
+    return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+  }
+  function updateTime() {
+    const currentTimeElement = document.getElementById('currentTime');
+    const currentTime = new Date();
+    const hours = currentTime.getHours();
+const minutes = currentTime. getMinutes();
+    const seconds = currentTime.getSeconds();
+    // 초가 0이 아닐 때에만 초를 표시
+    const formattedTime = formatTime(hours, minutes, seconds);
+    currentTimeElement.innerText = `현재 시간: ${formattedTime}`;
+  }
+  function calculateTimeRemaining(busTimes) {
+    const currentTime = new Date();
+    let nextBusTime = null;
+    for (const time of busTimes) {
+      const [hours, minutes] = time.split(':');
+      const busTime = new Date();
+      busTime.setHours(hours);
+      busTime.setMinutes(minutes);
+      if (busTime > currentTime) {
+        nextBusTime = busTime;
+        break;
+      }
+    }
+    if (nextBusTime) {
+      const timeDiff = nextBusTime - currentTime;
+      const hoursRemaining = Math.floor(timeDiff / (1000 * 60 * 60));
+      const minutesRemaining = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+      
+      if (hoursRemaining > 0) {
+        return `${hoursRemaining}시간 ${minutesRemaining}분`;
+      } else {
+        return `${minutesRemaining}분`;
+      }
+    } else {
+      const tomorrowFirstBusTime = new Date();
+      tomorrowFirstBusTime.setDate(currentTime.getDate() + 1);
+      tomorrowFirstBusTime.setHours(busTimes[0].split(':')[0]);
+      tomorrowFirstBusTime.setMinutes(busTimes[0].split(':')[1]);
+      const timeDiff = tomorrowFirstBusTime - currentTime;
+      const hoursRemaining = Math.floor(timeDiff / (1000 * 60 * 60));
+      const minutesRemaining = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+      return `운행 종료`;
+    }
+  }
+
+  function calculateNextTwoRemainingTimes(busTimes) {
+  const currentTime = new Date();
+  let nextBusTimes = [];
+
+  for (const time of busTimes) {
+    const [hours, minutes] = time.split(':');
+    const busTime = new Date();
+    busTime.setHours(hours);
+    busTime.setMinutes(minutes);
+    
+    if (busTime > currentTime) {
+      nextBusTimes.push(busTime);
+      if (nextBusTimes.length === 2) break;
+    }
+  }
+
+  if (nextBusTimes.length === 0) {
+    return ['운행 종료', ''];
+  }
+
+  const formatRemainingTime = (timeDiff) => {
+    const hoursRemaining = Math.floor(timeDiff / (1000 * 60 * 60));
+    const minutesRemaining = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+    
+    if (hoursRemaining > 0) {
+      return `${hoursRemaining}시간 ${minutesRemaining}분`;
+    } else {
+      return `${minutesRemaining}분`;
+    }
+  };
+
+  const remainingTimes = nextBusTimes.map(busTime => {
+    const timeDiff = busTime - currentTime;
+    return formatRemainingTime(timeDiff);
+  });
+
+  while (remainingTimes.length < 2) {
+    remainingTimes.push('');
+  }
+
+  return remainingTimes;
+}
+//, 다음 첫 차까지 : ${hoursRemaining}시간 ${minutesRemaining}분 (일요일에 제거 전까지 제거함)
+  
+  function updateBusTimes() {
+    const busTimesA1 = [
+      '08:20', '8:40', '8:50', '9:30', '9:40', '9:50', '10:30', '10:40',
+      '10:50', '11:30', '11:40', '11:50', '12:30', '12:40', '12:50', '13:40', '13:50', '14:40',
+      '14:50', '15:40', '15:50', '16:40', '16:50', '17:40', '17:50', '18:00'
+    ];
+    const busTimesA2 = [
+      '08:25', '08:45', '08:55', '09:35', '09:45', '09:55', '10:35',
+      '10:45', '10:55', '11:35', '11:45', '11:55', '12:35', '12:45','12:55', '13:45', '13:55',
+      '14:45', '14:55', '15:45', '15:55', '16:45', '16:55', '17:45', '17:55'
+    ];
+    const busTimesB1 = [
+      '8:35', '8:45', '8:55', '9:35', '9:45', '9:55', '10:35', '10:45', '10:55',
+      '11:35', '11:45', '11:55', '12:35', '12:45', '12:55', '13:45', '13:55', '14:45', '14:55',
+      '15:45', '15:55', '16:45', '16:55', '17:45', '17:55'
+    ];
+    const busTimesB2 = [
+      '08:30', '08:40', '08:50', '9:00', '9:40', '9:50', '10:00', '10:40', '10:50', '11:00',
+      '11:40', '11:50', '12:00', '12:40', '12:50', '13:00', '13:50', '14:00', '14:50', '15:00',
+      '15:50', '16:00', '16:50', '17:00', '17:50'
+    ];
+    const busTimesC1 = [
+      '17:00', '18:00', '19:00', '20:00', '21:00'
+    ];
+    const busTimesC2 = [
+      '17:10', '18:10', '19:10', '20:10', '21:10'
+    ];
+    const busTimesLate1 = ['08:20', '18:00', '18:50', '19:20', '19:45', '20:45', '21:25', '21:45'];
+    const busTimesLate2 = ['08:25', '18:05', '18:55', '19:25', '19:50', '20:50', '21:30', '21:50'];
+    const busTimesLate3 = ['08:30', '18:10', '19:00', '19:30', '19:55', '20:55', '21:35', '21:55'];  
+    const currentTime = new Date();
+    const currentHour = currentTime.getHours();
+    const currentMinute = currentTime.getMinutes();
+    // 현재 요일에 따라 노선 활성화 여부 결정
+    const currentDay = new Date().getDay( ); // 0: 일요일, 1: 월요일, ..., 6: 토요일
+    if (currentDay === 0) {
+        document.querySelectorAll('.container tr.inactive.black').forEach(el => el.classList.remove('inactive', 'black'));
+        const [remainingTimeC1, nextRemainingTimeC1] = calculateNextTwoRemainingTimes(busTimesC1);
+        const [remainingTimeC2, nextRemainingTimeC2] = calculateNextTwoRemainingTimes(busTimesC2);
+        document.getElementById('busTimeC1').innerText = remainingTimeC1;
+        document.getElementById('remainingTimeC1').innerText = nextRemainingTimeC1;
+        document.getElementById('busTimeC2').innerText = remainingTimeC2;
+        document.getElementById('remainingTimeC2').innerText = nextRemainingTimeC2;
+  } else {
+        document.querySelectorAll('.container tr.inactive').forEach(el => el.classList.add('inactive', 'black'));
+        document.getElementById('busTimeC1').innerText = '운행요일이 아닙니다.';
+        document.getElementById('busTimeC2').innerText = '운행요일이 아닙니다.';
+    }
+    // 토요일과 일요일을 제외한 모든 날에 A, B 노선 활성화
+    if (currentDay !== 0 && currentDay !== 6) {
+      document.querySelectorAll('.container tr.inactive').forEach(el => el.classList.remove('inactive'));
+      const [remainingTimeA1, nextRemainingTimeA1] = calculateNextTwoRemainingTimes(busTimesA1);
+      const [remainingTimeA2, nextRemainingTimeA2] = calculateNextTwoRemainingTimes(busTimesA2);
+      const [remainingTimeB1, nextRemainingTimeB1] = calculateNextTwoRemainingTimes(busTimesB1);
+      const [remainingTimeB2, nextRemainingTimeB2] = calculateNextTwoRemainingTimes(busTimesB2);
+      const [remainingTimeLate1, nextRemainingTimeLate1] = calculateNextTwoRemainingTimes(busTimesLate1);
+      const [remainingTimeLate2, nextRemainingTimeLate2] = calculateNextTwoRemainingTimes(busTimesLate2);
+      const [remainingTimeLate3, nextRemainingTimeLate3] = calculateNextTwoRemainingTimes(busTimesLate3);
+
+      document.getElementById('busTimeA1').innerText = remainingTimeA1;
+      document.getElementById('remainingTimeA1').innerText = nextRemainingTimeA1;
+      document.getElementById('busTimeA2').innerText = remainingTimeA2;
+      document.getElementById('remainingTimeA2').innerText = nextRemainingTimeA2;
+      document.getElementById('busTimeB1').innerText = remainingTimeB1;
+      document.getElementById('remainingTimeB1').innerText = nextRemainingTimeB1;
+      document.getElementById('busTimeB2').innerText = remainingTimeB2;
+      document.getElementById('remainingTimeB2').innerText = nextRemainingTimeB2;
+      document.getElementById('busTimeLate1').innerText = remainingTimeLate1;
+      document.getElementById('remainingTimeLate1').innerText = nextRemainingTimeLate1;
+      document.getElementById('busTimeLate2').innerText = remainingTimeLate2;
+      document.getElementById('remainingTimeLate2').innerText = nextRemainingTimeLate2;
+      document.getElementById('busTimeLate3').innerText = remainingTimeLate3;
+      document.getElementById('remainingTimeLate3').innerText = nextRemainingTimeLate3;
+      } else {
+        document.getElementById('busTimeA1').innerText = '운행요일이 아닙니다.';
+        document.getElementById('busTimeA2').innerText = '운행요일이 아닙니다.';
+        document.getElementById('busTimeB1').innerText = '운행요일이 아닙니다.';
+        document.getElementById('busTimeB2').innerText = '운행요일이 아닙니다.';
+        document.getElementById('busTimeLate1').innerText = '운행요일이 아닙니다.';
+        document.getElementById('busTimeLate2').innerText = '운행요일이 아닙니다.';
+        document.getElementById('busTimeLate3').innerText = '운행요일이 아닙니다.';
+      }
+}
+ 
+  setInterval(updateTime, 1000);
+  setInterval(updateBusTimes, 1000);
+</script>
+<script type="text/javascript" src="//wcs.naver.net/wcslog.js"></script>
+<script type="text/javascript">
+if(!wcs_add) var wcs_add = {};
+wcs_add["wa"] = "317848";
+if(window.wcs) {
+  wcs_do();
+}
+</script>    
+    
+</body>
+</html>
