@@ -9,6 +9,8 @@
   gtag('js', new Date());
   gtag('config', 'G-Z36W3EPHYF');
 </script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js">    
+</script>
   
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -94,37 +96,44 @@
       word-break: keep-all;
     }
     #notice {
-        border: 1px solid #E564B9;
-        background-color: #f3dbeb;
-        color: #a33b80;
-        padding: 10px;
-        border-radius: 10px;
-        display: none;
-        margin-bottom: 20px;
-        text-align: left;
-        word-break: keep-all;
+    border: 1px solid #E564B9;
+    background-color: #f3dbeb;
+    color: #a33b80;
+    padding: 10px;
+    border-radius: 10px;
+    display: none;
+    margin-bottom: 20px;
+    text-align: left;
+    word-break: keep-all;
     }
+
     #notice > details {
         transition: background-color 500ms ease 0s;
     }
+
     summary::marker {
         content: "▶ 공지사항 펼치기";
     }
+
     details[open] summary::marker {
         content: "️▼ 공지사항 접기";
     }
+
     #notice-text {
         font-size: 20px;
         margin-bottom: 10px;
     }
+
     #notice-text > hr {
         background-color: #E564B9;
         height: 1px;
         border: 0;
     }
+
     #notice-list {
         margin-top: 5px;
     }
+
     #notice-list > ul {
         margin: 0;
     }
@@ -161,6 +170,15 @@
     tr.inactive.black td {
       background-color: #ddd; /* 흐린 검은색 */
     }
+        .notice-link {
+        color: inherit; /* 부모 요소의 색상과 동일하게 유지 */
+        cursor: pointer; /* 마우스 포인터 표시 */
+    }
+
+    /* 마우스를 올렸을 때: 툴팁 표시 */
+    .notice-link:hover {
+        text-decoration: underline; /* 마우스 오버 시 밑줄 표시 */
+    }
   </style>
 </head>
 <body>
@@ -169,21 +187,27 @@
   
   <!-- 공지사항부분 -->
   <!-- <h6>
-   </h6> -->
-  
+    [입시기간 교내 셔틀버스 운행 안내]하단 홈페이지 시간표가 아닌 하단 학교 홈페이지 공지를 참고하시기 바랍니다 
+  </h6> -->
+  <!-- <div>
+   <a href="https://www.instagram.com/p/DA97rtGyutS/?img_index=1" id="timetableButton" target="_blank">학교 공지사항</a>
+  </div> -->
   <div id="notice">
-      <div id="notice-text">공지사항<hr></div>
-      <details open>
-          <summary></summary>
-          <div id="notice-list"></div>
-      </details>
-  </div>
-  <div>
+    <div id="notice-text">공지사항<hr></div>
+    <details open>
+        <summary></summary>
+        <div id="notice-list"></div>
+    </details>
+</div>
+
+<div>
     <span id="currentTime"></span>
+    
     <a href="https://www.dima.ac.kr/?p=97" id="timetableButton" target="_blank">시간표 보러가기</a>
     <a href="https://mytwice.github.io/DIMABUS/routemap" id="timetableButton" target="_blank">노선도</a>
     <a href="https://open.kakao.com/o/sQ5O8Zfg" id="timetableButton" target="_blank">오류 제보</a>
-  </div>
+</div>
+
   <table>
   <tr>
     <th>평일 운행 노선</th>
@@ -258,20 +282,20 @@
   <div>
     모든 내용은 참고 용도로 이용하기를 바라며, 또한 이 사이트를 이용함으로 발생하는 손해에 대해 책임지지 않습니다.
   </div>
-  <div>원활한 운영을 위해 네이버, 구글 애널리틱스로 방문자 수 등을 집계하고 있습니다.
+  <div>
+    원활한 운영을 위해 네이버, 구글 애널리틱스로 방문자 수 등을 집계하고 있습니다.
   </div>
   <div>
   ※ 홈 화면에 바로가기를 추가하면 편리합니다.
-  </div>
-  <div>
   <a href="https://blog.naver.com/hwser2005/221762536378">IOS 아이폰</a>
   <a href="https://healthydoctor.tistory.com/306">안드로이드</a>
   <a href="https://blog.naver.com/sanae_art/223144378452">갤럭시워치</a>
-    업데이트 : 24.11.26 시간표 수정
+  </div>
+  <div>
+    업데이트 : 24.11.27 실시간 공지사항 추가
   </div>
 <script>
   let myKey = "1iMPbNin0C5v9oIqEQm0aM4OCg9IwDswemDxdEW0Ati8"; // 스프레드시트 KEY
-
   function formatTime(hours, minutes, seconds) {
     return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
   }
@@ -452,50 +476,65 @@ const minutes = currentTime. getMinutes();
   setInterval(updateBusTimes, 1000);
 
   google.charts.load("current", { packages: ["corechart"] }).then(() => {
-      let query = new google.visualization.Query(
-          `http://spreadsheets.google.com/tq?key=${myKey}&pub=1`
-      );
-  
-      query.send((response) => {
-          if (response.isError()) {
-              console.error(
-                  "Error in query: " +
-                  response.getMessage() +
-                  " " +
-                  response.getDetailedMessage()
-          );
-          return;
-          }
-  
-          let dataTable = response.getDataTable().toJSON();
-          let jsonData = JSON.parse(dataTable);
-          let cols = jsonData.cols.map((col) => col.label);
-          let rows = jsonData.rows.map((row) => {
-          let newRow;
-  
-          row.c.forEach((obj, index) => {
-              if (obj == null || obj == undefined) return; //빈값이 경우 정지
-              obj[cols[index]] = "f" in obj ? obj["f"] : obj["v"];
-              ["f", "v"].forEach((each) => delete obj[each]);
-              newRow = { ...newRow, ...obj };
-          });
-  
-          return newRow;
-          });
-  
-          var arr = [];
-  
-          for (var i in rows) {
-              if (rows[i]['공지 ON/OFF'] === "TRUE") {
-                  document.getElementById('notice').style.display = "flow-root";
-                  arr.push("<li>" + rows[i]['공지사항'] + "</li>");
-              }
-          };
-          
-          document.getElementById('notice-list').innerHTML = "<ul>" + arr.join('\n') + "</ul>";
-      });
-  });
-  
+    let query = new google.visualization.Query(
+        `http://spreadsheets.google.com/tq?key=${myKey}&pub=1`
+    );
+
+    query.send((response) => {
+        if (response.isError()) {
+            console.error(
+                "Error in query: " +
+                response.getMessage() +
+                " " +
+                response.getDetailedMessage()
+            );
+            return;
+        }
+
+        let dataTable = response.getDataTable().toJSON();
+        let jsonData = JSON.parse(dataTable);
+        let cols = jsonData.cols.map((col) => col.label);
+        let rows = jsonData.rows.map((row) => {
+            let newRow;
+
+            row.c.forEach((obj, index) => {
+                if (obj == null || obj == undefined) return; // 빈값일 경우 건너뛰기
+                obj[cols[index]] = "f" in obj ? obj["f"] : obj["v"];
+                ["f", "v"].forEach((each) => delete obj[each]);
+                newRow = { ...newRow, ...obj };
+            });
+
+            return newRow;
+        });
+
+        var arr = [];
+
+        for (var i in rows) {
+            if (rows[i]['공지 ON/OFF'] === "TRUE") {
+                document.getElementById('notice').style.display = "flow-root";
+
+                // 공지 텍스트
+                let noticeText = rows[i]['공지사항'];
+
+                // 링크가 있으면 <a> 태그로 감싸기
+                if (rows[i]['링크']) {
+                    arr.push(`
+                        <li>
+                            <a href="${rows[i]['링크']}" target="_blank" class="notice-link" title="공지로 이동">
+                                ${noticeText}
+                            </a>
+                        </li>
+                    `);
+                } else {
+                    arr.push(`<li>${noticeText}</li>`); // 링크가 없으면 그냥 텍스트만
+                }
+            }
+        }
+
+        document.getElementById('notice-list').innerHTML = "<ul>" + arr.join('\n') + "</ul>";
+    });
+
+});
 </script>
 <script type="text/javascript" src="//wcs.naver.net/wcslog.js"></script>
 <script type="text/javascript">
